@@ -1,14 +1,25 @@
 package com.youruber.youruber.entities;
 
-import java.util.Objects;
 import java.io.Serializable;
+import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name= "tb_driver")
 public class Driver  implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 
 	
 	
-	private int cnh;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id; 
+	private String cnh;
 	private String name; 
 	private String veiculo; 
 	
@@ -16,18 +27,28 @@ public class Driver  implements Serializable{
 		
 	}
 
-	public Driver(int cnh, String name, String veiculo) {
+	public Driver(int id, String cnh, String name, String veiculo) {
 		super();
+		this.id = id;
 		this.cnh = cnh;
 		this.name = name;
 		this.veiculo = veiculo;
 	}
+	
 
-	public int getCnh() {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCnh() {
 		return cnh;
 	}
 
-	public void setCnh(int cnh) {
+	public void setCnh(String cnh) {
 		this.cnh = cnh;
 	}
 
@@ -49,7 +70,7 @@ public class Driver  implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cnh, name, veiculo);
+		return Objects.hash(cnh, id, name, veiculo);
 	}
 
 	@Override
@@ -61,10 +82,11 @@ public class Driver  implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Driver other = (Driver) obj;
-		return Objects.equals(cnh, other.cnh) && Objects.equals(name, other.name)
+		return Objects.equals(cnh, other.cnh) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(veiculo, other.veiculo);
 	}
-   
+
+	
 	
 	
 }
