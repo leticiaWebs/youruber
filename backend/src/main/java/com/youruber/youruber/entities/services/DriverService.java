@@ -36,5 +36,14 @@ public class DriverService {
 	Driver entity = obj.orElseThrow(() -> new EntityNotFoundException("Driver not found"));
 	return new DriverDTO(entity); 
     }
+    
+    @Transactional
+	public DriverDTO insert(DriverDTO dto) {
+		Driver entity = new Driver();
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
+		return new DriverDTO(entity);
+	}
+    
 
 }
