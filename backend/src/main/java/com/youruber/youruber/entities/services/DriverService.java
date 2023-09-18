@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.youruber.youruber.dto.DriverDTO;
 import com.youruber.youruber.entities.Driver;
 import com.youruber.youruber.entities.services.exceptions.ResourceNotFoundException;
+import com.youruber.youruber.resources.exceptions.DataBaseException;
 import com.youruber.youruber.respositories.DriverRepository;
 
 @Service
@@ -64,6 +67,19 @@ public class DriverService {
      }
      
 	}
-  
 
+	public void delete(Integer id) {
+	 try {
+		repository.deleteById(id);
+	}
+	catch(EmptyResultDataAccessException e) {
+		throw new ResourceNotFoundException("Id not found" +id);
+	}
+	 
+	catch (DataIntegrityViolationException e ) {
+		throw new DataBaseException("Integrity violation");
+		
+	}
+  
+	}
 }
