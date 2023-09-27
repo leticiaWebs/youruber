@@ -20,7 +20,7 @@ import com.youruber.youruber.entities.services.DriverService;
 
 @RestController
 @RequestMapping(value = "/drivers")
-public class DriverResource {
+public class DriverController {
 	
 	@Autowired
 	private DriverService service;

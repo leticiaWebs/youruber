@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 @Entity
 @Table(name= "tb_driver")
 public class Driver  implements Serializable{
@@ -22,6 +28,9 @@ public class Driver  implements Serializable{
 	private String cnh;
 	private String name; 
 	private String veiculo; 
+	
+	
+
 	
 	public Driver() {
 		
@@ -85,6 +94,8 @@ public class Driver  implements Serializable{
 		return Objects.equals(cnh, other.cnh) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(veiculo, other.veiculo);
 	}
+
+
 
 	
 	

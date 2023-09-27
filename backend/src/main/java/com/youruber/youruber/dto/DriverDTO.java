@@ -2,12 +2,24 @@ package com.youruber.youruber.dto;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import com.youruber.youruber.entities.Driver;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@Entity
 
 public class DriverDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 
 	
+	@Id
 	private int id; 
 	private String cnh;
 	private String name; 
