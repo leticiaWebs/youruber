@@ -8,7 +8,7 @@ import com.youruber.youruber.entities.Passageiro;
 public class PassageiroDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private int id;
 	private String name;
 	private LocalDate dataNascimento; 
     private String CPF;
@@ -17,7 +17,7 @@ public class PassageiroDTO implements Serializable{
     	
     }
     
-    public PassageiroDTO(Long id, String name, LocalDate dataNascimento, String CPF) {
+    public PassageiroDTO(int id, String name, LocalDate dataNascimento, String CPF) {
     	
 		this.id = id;
 		this.name = name;
@@ -32,11 +32,11 @@ public class PassageiroDTO implements Serializable{
  		this.CPF = entity.getCPF();
      }
     
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

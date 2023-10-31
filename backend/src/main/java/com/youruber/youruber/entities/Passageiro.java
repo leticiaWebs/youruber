@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +15,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name= "tb_passageiros")
 public class Passageiro {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	private String name;
 	private LocalDate dataNascimento; 
     private String CPF;
@@ -28,7 +30,7 @@ public class Passageiro {
 		
 	}
 
-	public Passageiro(Long id, String name,  LocalDate dataNascimento, String CPF) {
+	public Passageiro(int id, String name,  LocalDate dataNascimento, String CPF) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -36,11 +38,11 @@ public class Passageiro {
 		this.CPF = CPF;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
