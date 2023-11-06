@@ -32,6 +32,15 @@ public class PassageiroService {
 	Passageiro entity = obj.orElseThrow(() -> new ResourceNotFoundException("Passageiro não foi encontrado"));
 	return new PassageiroDTO(entity); 
 	}
+    
+    @Transactional
+	public PassageiroDTO insert(PassageiroDTO dto) {
+		Passageiro entity = new Passageiro();
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
+		return new PassageiroDTO(entity);
+		
+	}
 	 
 
     
