@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,12 +43,21 @@ public class PassageiroService {
 		return new PassageiroDTO(entity);
 		
 	}
-	 
-
     
-	  
+   @Transactional
+	public PassageiroDTO update(Integer id, PassageiroDTO dto) {
+		try {
+		Passageiro entity = repository.getReferenceById(id);
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
+		return new PassageiroDTO(entity);
 		
 	}
+		catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found" + id);
+		}		   		
+	}
+}
 	
 	
 	
