@@ -16,6 +16,7 @@ import com.youruber.youruber.dto.PassageiroDTO;
 import com.youruber.youruber.entities.Passageiro;
 import com.youruber.youruber.entities.services.exceptions.ResourceNotFoundException;
 import com.youruber.youruber.resources.exceptions.DataBaseException;
+import com.youruber.youruber.resources.exceptions.UnprocessableEntityException;
 import com.youruber.youruber.respositories.PassageiroRepository;
 
 @Service
@@ -40,12 +41,16 @@ public class PassageiroService {
     
     @Transactional
 	public PassageiroDTO insert(PassageiroDTO dto) {
-		Passageiro entity = new Passageiro();
+		try {
+    	Passageiro entity = new Passageiro();
 		entity.setName(dto.getName());
 		entity = repository.save(entity);
 		return new PassageiroDTO(entity);
 		
+	} catch (UnprocessableEntityException e) {
+		throw new UnprocessableEntityException("CPF já existente no sistema");
 	}
+      }
     
    @Transactional
 	public PassageiroDTO update(Integer id, PassageiroDTO dto) {
@@ -58,10 +63,11 @@ public class PassageiroService {
 	}
 		catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found" + id);
-		}	
-		
-		
 	}
+     catch (UnprocessableEntityException e) {
+		throw new UnprocessableEntityException("CPF já existente no sistema");
+	}
+ }
 
     public void delete(Integer id) {
      try {

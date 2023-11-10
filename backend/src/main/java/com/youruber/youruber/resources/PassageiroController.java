@@ -46,7 +46,7 @@ public class PassageiroController {
 
     }
     
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{CPF}")
     public ResponseEntity<PassageiroDTO> update (@PathVariable Integer id, @RequestBody PassageiroDTO dto){
     	dto = service.update(id, dto);
     	return ResponseEntity.ok().body(dto);

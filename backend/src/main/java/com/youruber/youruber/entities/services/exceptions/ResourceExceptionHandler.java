@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.youruber.youruber.resources.exceptions.DataBaseException;
 import com.youruber.youruber.resources.exceptions.StandardError;
+import com.youruber.youruber.resources.exceptions.UnprocessableEntityException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -36,6 +37,18 @@ public class ResourceExceptionHandler {
 	   err.setMessage(e.getMessage());
        err.setPath(request.getRequestURI());
        return ResponseEntity.status(status).body(err);
+	}
+	
+	 @ExceptionHandler(UnprocessableEntityException.class)
+	public ResponseEntity<StandardError> unprocessableEntity(UnprocessableEntityException e, HttpServletRequest request){
+	   HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+	   StandardError err = new StandardError();
+	   err.setTimestamp(Instant.now());
+	   err.setStatus(status.value());
+	   err.setError("Unprocessable Entity exception");
+	   err.setMessage(e.getMessage());
+       err.setPath(request.getRequestURI());
+       return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 	
 	

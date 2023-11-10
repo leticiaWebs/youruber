@@ -3,6 +3,7 @@ package com.youruber.youruber.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Driver  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 
+	@Column(unique=true)
 	private String cnh;
 	private String name; 
 	private String veiculo; 
