@@ -16,6 +16,7 @@ import com.youruber.youruber.dto.DriverDTO;
 import com.youruber.youruber.entities.Driver;
 import com.youruber.youruber.entities.services.exceptions.ResourceNotFoundException;
 import com.youruber.youruber.resources.exceptions.DataBaseException;
+import com.youruber.youruber.resources.exceptions.UnprocessableEntityException;
 import com.youruber.youruber.respositories.DriverRepository;
 
 @Service
@@ -64,10 +65,12 @@ public class DriverService {
      catch (EntityNotFoundException e) {
     	 throw new ResourceNotFoundException("Id not found" + id);
     	 
-     }
+     } catch (UnprocessableEntityException e) {
+ 		throw new UnprocessableEntityException("Integrity violation"); 
      
 	}
 
+    }
 	public void delete(Integer id) {
 	 try {
 		repository.deleteById(id);
